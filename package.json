@@ -9,6 +9,7 @@
     "start": "NODE_ENV=development parcel index.html -p 3000"
   },
   "devDependencies": {
+    "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -17,6 +18,8 @@
   },
   "dependencies": {
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-router5": "^5.4.1",
+    "router5": "^5.7.2"
   }
 }

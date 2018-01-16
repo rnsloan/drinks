@@ -2,6 +2,7 @@
 .vscode
 .cache
 dist
+test.json
 
 # Logs
 logs
