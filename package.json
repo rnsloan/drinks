@@ -17,6 +17,7 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
+    "aphrodite": "^1.2.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router5": "^5.4.1",
