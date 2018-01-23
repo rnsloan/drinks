@@ -1,17 +1,17 @@
 import * as React from "react";
 import Cocktail, { CocktailInterface } from "./Cocktail";
 
-interface CocktailProps {
+interface CocktailsListProps {
   data: Array<CocktailInterface>;
 }
 
-const CocktailsList = props => {
+const CocktailsList: React.SFC<CocktailsListProps> = props => {
   return (
     <ul>
       {props.data.map(cocktail => {
         return (
           <li key={cocktail.idDrink}>
-            <Cocktail data={cocktail} />
+            <Cocktail data={cocktail} makeTitleLink={true} short={true} />
           </li>
         );
       })}

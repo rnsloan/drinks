@@ -1,5 +1,5 @@
 export default [
   { name: "home", path: "/" },
   { name: "search", path: "/search?name" },
-  { name: "cocktail", path: "/cocktail" }
+  { name: "cocktail", path: "/cocktail-:id-:cocktailName" }
 ];

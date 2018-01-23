@@ -1,15 +1,15 @@
 import * as React from "react";
 import { withRoute } from "react-router5";
-import Home from "./Home";
-import Search from "./Search";
-import Cocktail from "./Cocktail";
+import HomePage from "./HomePage";
+import SearchPage from "./SearchPage";
+import CocktailPage from "./CocktailPage";
 
 const NotFound = () => <div>NotFound</div>;
 
 const components = {
-  home: Home,
-  search: Search,
-  cocktail: Cocktail
+  home: HomePage,
+  search: SearchPage,
+  cocktail: CocktailPage
 };
 
 const Pages = props => {

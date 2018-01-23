@@ -1,9 +1,10 @@
 import * as React from "react";
 import { getJson } from "../utils/network";
 import CocktailsList from "../components/CocktailsList";
+import { CocktailInterface } from "../components/Cocktail";
 
 interface SearchState {
-  results: Array<Object> | null;
+  results: Array<CocktailInterface> | null;
   isLoading: Boolean;
 }
 
@@ -30,11 +31,11 @@ export default class Search extends React.Component<{}, SearchState> {
     }
   }
   render() {
-    if (this.state.results && this.state.results.length > 0) {
-      return <CocktailsList data={this.state.results} />;
-    }
     if (this.state.isLoading) {
       return <p>Loading...</p>;
+    }
+    if (this.state.results && this.state.results.length > 0) {
+      return <CocktailsList data={this.state.results} />;
     }
     return <p>No results</p>;
   }

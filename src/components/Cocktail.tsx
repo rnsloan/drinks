@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ReactHTMLElement, HTMLFactory } from "react";
+import { Link } from "react-router5";
 
 export interface CocktailInterface {
   strDrink: string;
@@ -46,6 +47,8 @@ export interface CocktailInterface {
 
 interface CocktailProps {
   data: CocktailInterface;
+  makeTitleLink?: Boolean;
+  short?: Boolean;
 }
 
 function ingredientList(
@@ -64,30 +67,51 @@ function ingredientList(
   return ingredients;
 }
 
-const Cocktail = props => {
-  const { data } = props;
+const Cocktail: React.SFC<CocktailProps> = props => {
+  const { data, makeTitleLink, short } = props;
+  const urlName = data.strDrink
+    .replace(/\s/g, "_")
+    .replace(/\W/g, "")
+    .replace(/_/g, "-")
+    .trim()
+    .toLowerCase();
   return (
     <section>
-      <h2>{data.strDrink}</h2>
-      <h3>
-        Alcoholic: {data.strAlcoholic === "Alcoholic" ? "Yes" : "No"}
-        <br />
-      </h3>
-      <h3>Ingredients:</h3>
-      <ul>{ingredientList(props.data)}</ul>
-      <h3>Instructions:</h3>
-      <p>{data.strInstructions}</p>
-      {data.strDrinkThumb && (
-        <p>
-          <img
-            src={data.strDrinkThumb}
-            alt="data.strDrink"
-            width="100"
-            height="100"
-          />
-        </p>
+      {makeTitleLink ? (
+        <h2>
+          <Link
+            routeName="cocktail"
+            routeParams={{ id: data.idDrink, cocktailName: urlName }}
+          >
+            {data.strDrink}
+          </Link>
+        </h2>
+      ) : (
+        <h2>{data.strDrink}</h2>
       )}
-      {data.strVideo && <a href={data.strVideo}>Video</a>}
+      {!short && (
+        <div>
+          <h3>
+            Alcoholic: {data.strAlcoholic === "Alcoholic" ? "Yes" : "No"}
+            <br />
+          </h3>
+          <h3>Ingredients:</h3>
+          <ul>{ingredientList(props.data)}</ul>
+          <h3>Instructions:</h3>
+          <p>{data.strInstructions}</p>
+          {data.strDrinkThumb && (
+            <p>
+              <img
+                src={data.strDrinkThumb}
+                alt="data.strDrink"
+                width="100"
+                height="100"
+              />
+            </p>
+          )}
+          {data.strVideo && <a href={data.strVideo}>Video</a>}
+        </div>
+      )}
     </section>
   );
 };
