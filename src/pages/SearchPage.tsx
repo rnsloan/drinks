@@ -1,7 +1,13 @@
 import * as React from "react";
+import { StyleSheet, css } from "aphrodite";
 import { getJson } from "../utils/network";
 import CocktailsList from "../components/CocktailsList";
 import { CocktailInterface } from "../components/Cocktail";
+import Loader, { wrapper } from "../components/Loader";
+
+const styles = StyleSheet.create({
+  loaderWrapper: wrapper
+});
 
 interface SearchState {
   results: Array<CocktailInterface> | null;
@@ -32,7 +38,11 @@ export default class Search extends React.Component<{}, SearchState> {
   }
   render() {
     if (this.state.isLoading) {
-      return <p>Loading...</p>;
+      return (
+        <div className={css(styles.loaderWrapper)}>
+          <Loader />
+        </div>
+      );
     }
     if (this.state.results && this.state.results.length > 0) {
       return <CocktailsList data={this.state.results} />;

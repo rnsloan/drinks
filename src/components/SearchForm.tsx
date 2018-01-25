@@ -51,7 +51,7 @@ class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
     return (
       <form className={css(styles.form)} onSubmit={this.handleSubmit}>
         <input
-          aria-label="Search"
+          aria-label="Search by cocktail name"
           className={css(styles.input)}
           type="search"
           placeholder="Enter cocktail name e.g. Bloody Mary"

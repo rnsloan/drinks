@@ -78,14 +78,14 @@ const Cocktail: React.SFC<CocktailProps> = props => {
   return (
     <section>
       {makeTitleLink ? (
-        <h2>
+        <h3>
           <Link
             routeName="cocktail"
             routeParams={{ id: data.idDrink, cocktailName: urlName }}
           >
             {data.strDrink}
           </Link>
-        </h2>
+        </h3>
       ) : (
         <h2>{data.strDrink}</h2>
       )}
