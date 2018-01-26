@@ -9,7 +9,7 @@ const NotFound = () => <div>NotFound</div>;
 const components = {
   home: HomePage,
   search: SearchPage,
-  cocktail: CocktailPage
+  drink: CocktailPage
 };
 
 const Pages = props => {

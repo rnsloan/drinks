@@ -1,7 +1,13 @@
 import * as React from "react";
+import { StyleSheet, css } from "aphrodite";
 import { withRoute, InjectedRoute } from "react-router5";
 import { getJson } from "../utils/network";
 import Cocktail, { CocktailInterface } from "../components/Cocktail";
+import Loader, { wrapper } from "../components/Loader";
+
+const styles = StyleSheet.create({
+  loaderWrapper: wrapper
+});
 
 interface SearchState {
   result: CocktailInterface | null;
@@ -31,7 +37,11 @@ class CocktailPage extends React.Component<InjectedRoute, SearchState> {
   }
   render() {
     if (this.state.isLoading) {
-      return <p>Loading...</p>;
+      return (
+        <div className={css(styles.loaderWrapper)}>
+          <Loader />
+        </div>
+      );
     }
     if (!this.state.result) {
       return <p>Unable to find cocktail</p>;
