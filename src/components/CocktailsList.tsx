@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
 
 function category(category: string) {
   let icon = other;
-  console.log(category);
   switch (category) {
     case "Ordinary Drink":
       break;
@@ -67,24 +66,21 @@ interface CocktailsListProps {
 
 const CocktailsList: React.SFC<CocktailsListProps> = props => {
   return (
-    <div>
-      <h2>Results:</h2>
-      <ul className={css(styles.list)}>
-        {props.data.map(cocktail => {
-          return (
-            <li
-              className={css(styles.listItem)}
-              style={{
-                backgroundImage: `url(${category(cocktail.strCategory)}`
-              }}
-              key={cocktail.idDrink}
-            >
-              <Cocktail data={cocktail} inList={true} />
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <ul className={css(styles.list)}>
+      {props.data.map(cocktail => {
+        return (
+          <li
+            className={css(styles.listItem)}
+            style={{
+              backgroundImage: `url(${category(cocktail.strCategory)}`
+            }}
+            key={cocktail.idDrink}
+          >
+            <Cocktail data={cocktail} inList={true} />
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
