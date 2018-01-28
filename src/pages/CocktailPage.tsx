@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from "aphrodite/no-important";
 import { withRoute, InjectedRoute } from "react-router5";
 import { getJson } from "../utils/network";
 import Cocktail, { CocktailInterface } from "../components/Cocktail";

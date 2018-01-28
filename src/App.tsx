@@ -4,7 +4,7 @@ import Pages from "./pages/Pages";
 import Header from "./components/Header";
 import "./utils/css";
 
-import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from "aphrodite/no-important";
 
 const styles = StyleSheet.create({
   pages: {

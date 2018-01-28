@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from "aphrodite/no-important";
 import { brightPurple } from "../utils/css";
 
 const translateKeyframes = {

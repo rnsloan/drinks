@@ -1,7 +1,7 @@
 import * as React from "react";
 import { withRoute } from "react-router5";
 import { Router } from "router5";
-import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from "aphrodite/no-important";
 
 const styles = StyleSheet.create({
   form: {

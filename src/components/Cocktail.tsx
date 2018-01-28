@@ -1,6 +1,14 @@
 import * as React from "react";
 import { ReactHTMLElement, HTMLFactory } from "react";
 import { Link } from "react-router5";
+import { StyleSheet, css } from "aphrodite/no-important";
+import { styles as extraStyles } from "../utils/css";
+
+const styles = StyleSheet.create({
+  listHeading: {
+    fontSize: "36px"
+  }
+});
 
 export interface CocktailInterface {
   strDrink: string;
@@ -47,8 +55,7 @@ export interface CocktailInterface {
 
 interface CocktailProps {
   data: CocktailInterface;
-  makeTitleLink?: Boolean;
-  short?: Boolean;
+  inList?: Boolean;
 }
 
 function ingredientList(
@@ -68,50 +75,52 @@ function ingredientList(
 }
 
 const Cocktail: React.SFC<CocktailProps> = props => {
-  const { data, makeTitleLink, short } = props;
+  const { data, inList } = props;
   const urlName = data.strDrink
     .replace(/\s/g, "_")
     .replace(/\W/g, "")
     .replace(/_/g, "-")
     .trim()
     .toLowerCase();
+
+  if (inList) {
+    return (
+      <h3 className={css(styles.listHeading)}>
+        <Link
+          routeName="drink"
+          routeParams={{ id: data.idDrink, drinkName: urlName }}
+        >
+          {data.strDrink}{" "}
+          <span className={css(extraStyles.hidden)}>
+            (category: {data.strCategory})
+          </span>
+        </Link>
+      </h3>
+    );
+  }
+
   return (
     <section>
-      {makeTitleLink ? (
-        <h3>
-          <Link
-            routeName="drink"
-            routeParams={{ id: data.idDrink, drinkName: urlName }}
-          >
-            {data.strDrink}
-          </Link>
-        </h3>
-      ) : (
-        <h2>{data.strDrink}</h2>
+      <h2>{data.strDrink}</h2>
+      <h3>
+        Alcoholic: {data.strAlcoholic === "Alcoholic" ? "Yes" : "No"}
+        <br />
+      </h3>
+      <h3>Ingredients:</h3>
+      <ul>{ingredientList(props.data)}</ul>
+      <h3>Instructions:</h3>
+      <p>{data.strInstructions}</p>
+      {data.strDrinkThumb && (
+        <p>
+          <img
+            src={data.strDrinkThumb}
+            alt="data.strDrink"
+            width="100"
+            height="100"
+          />
+        </p>
       )}
-      {!short && (
-        <div>
-          <h3>
-            Alcoholic: {data.strAlcoholic === "Alcoholic" ? "Yes" : "No"}
-            <br />
-          </h3>
-          <h3>Ingredients:</h3>
-          <ul>{ingredientList(props.data)}</ul>
-          <h3>Instructions:</h3>
-          <p>{data.strInstructions}</p>
-          {data.strDrinkThumb && (
-            <p>
-              <img
-                src={data.strDrinkThumb}
-                alt="data.strDrink"
-                width="100"
-                height="100"
-              />
-            </p>
-          )}
-          {data.strVideo && <a href={data.strVideo}>Video</a>}
-        </div>
-      )}
+      {data.strVideo && <a href={data.strVideo}>Video</a>}
     </section>
   );
 };

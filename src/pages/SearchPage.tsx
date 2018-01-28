@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, css } from "aphrodite";
+import { StyleSheet, css } from "aphrodite/no-important";
 import { getJson } from "../utils/network";
 import CocktailsList from "../components/CocktailsList";
 import { CocktailInterface } from "../components/Cocktail";
