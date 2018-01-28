@@ -1,5 +1,5 @@
 import * as React from "react";
-import Cocktail, { CocktailInterface } from "./Cocktail";
+import Drink, { DrinkInterface } from "./Drink";
 import { StyleSheet, css } from "aphrodite/no-important";
 const cocktail = require("../assets/cocktail.svg") as string;
 const cocoa = require("../assets/cocoa.svg") as string;
@@ -60,23 +60,23 @@ function category(category: string) {
   return icon;
 }
 
-interface CocktailsListProps {
-  data: Array<CocktailInterface>;
+interface DrinksListProps {
+  data: Array<DrinkInterface>;
 }
 
-const CocktailsList: React.SFC<CocktailsListProps> = props => {
+const DrinksList: React.SFC<DrinksListProps> = props => {
   return (
     <ul className={css(styles.list)}>
-      {props.data.map(cocktail => {
+      {props.data.map(drink => {
         return (
           <li
             className={css(styles.listItem)}
             style={{
-              backgroundImage: `url(${category(cocktail.strCategory)}`
+              backgroundImage: `url(${category(drink.strCategory)}`
             }}
-            key={cocktail.idDrink}
+            key={drink.idDrink}
           >
-            <Cocktail data={cocktail} inList={true} />
+            <Drink data={drink} inList={true} />
           </li>
         );
       })}
@@ -84,4 +84,4 @@ const CocktailsList: React.SFC<CocktailsListProps> = props => {
   );
 };
 
-export default CocktailsList;
+export default DrinksList;

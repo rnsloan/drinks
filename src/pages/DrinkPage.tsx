@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { withRoute, InjectedRoute } from "react-router5";
 import { getJson } from "../utils/network";
-import Cocktail, { CocktailInterface } from "../components/Cocktail";
+import Drink, { DrinkInterface } from "../components/Drink";
 import Loader, { wrapper } from "../components/Loader";
 
 const styles = StyleSheet.create({
@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
 });
 
 interface SearchState {
-  result: CocktailInterface | null;
+  result: DrinkInterface | null;
   isLoading: Boolean;
 }
 
-class CocktailPage extends React.Component<InjectedRoute, SearchState> {
+class DrinkPage extends React.Component<InjectedRoute, SearchState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,12 +23,12 @@ class CocktailPage extends React.Component<InjectedRoute, SearchState> {
     };
   }
   componentDidMount() {
-    const cocktailId = this.props.route.path.match(/[0-9]+/);
-    if (cocktailId) {
+    const drinkId = this.props.route.path.match(/[0-9]+/);
+    if (drinkId) {
       this.setState({ isLoading: true });
       const data = async () => {
         let value = await getJson(
-          `select+*+from+all_drinks+where+idDrink%3D${cocktailId}`
+          `select+*+from+all_drinks+where+idDrink%3D${drinkId}`
         );
         this.setState({ result: value.rows[0], isLoading: false });
       };
@@ -44,10 +44,10 @@ class CocktailPage extends React.Component<InjectedRoute, SearchState> {
       );
     }
     if (!this.state.result) {
-      return <p>Unable to find cocktail</p>;
+      return <p>Unable to find drink</p>;
     }
-    return <Cocktail data={this.state.result} />;
+    return <Drink data={this.state.result} />;
   }
 }
 
-export default withRoute(CocktailPage);
+export default withRoute(DrinkPage);

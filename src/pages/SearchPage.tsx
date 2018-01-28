@@ -1,8 +1,8 @@
 import * as React from "react";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { getJson } from "../utils/network";
-import CocktailsList from "../components/CocktailsList";
-import { CocktailInterface } from "../components/Cocktail";
+import DrinksList from "../components/DrinksList";
+import { DrinkInterface } from "../components/Drink";
 import Loader, { wrapper } from "../components/Loader";
 
 const styles = StyleSheet.create({
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 
 interface SearchState {
-  results: Array<CocktailInterface> | null;
+  results: Array<DrinkInterface> | null;
   isLoading: Boolean;
   query: String;
 }
@@ -60,7 +60,7 @@ export default class Search extends React.Component<{}, SearchState> {
               &lsquo;{this.state.query}&rsquo;
             </small>
           </h2>
-          <CocktailsList data={this.state.results} />
+          <DrinksList data={this.state.results} />
         </div>
       );
     }

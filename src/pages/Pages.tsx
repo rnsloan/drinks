@@ -2,14 +2,14 @@ import * as React from "react";
 import { withRoute } from "react-router5";
 import HomePage from "./HomePage";
 import SearchPage from "./SearchPage";
-import CocktailPage from "./CocktailPage";
+import DrinkPage from "./DrinkPage";
 
 const NotFound = () => <div>NotFound</div>;
 
 const components = {
   home: HomePage,
   search: SearchPage,
-  drink: CocktailPage
+  drink: DrinkPage
 };
 
 const Pages = props => {

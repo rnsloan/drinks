@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export interface CocktailInterface {
+export interface DrinkInterface {
   strDrink: string;
   idDrink: number;
   dateModified: Date;
@@ -53,20 +53,20 @@ export interface CocktailInterface {
   strVideo: string | null;
 }
 
-interface CocktailProps {
-  data: CocktailInterface;
+interface DrinkProps {
+  data: DrinkInterface;
   inList?: Boolean;
 }
 
 function ingredientList(
-  cocktail: CocktailInterface
+  drink: DrinkInterface
 ): Array<HTMLFactory<HTMLLIElement>> {
   const ingredients = [];
   for (let i = 1, len = 15; i < len; i++) {
-    if (typeof cocktail[`strIngredient${i}`] === "string") {
+    if (typeof drink[`strIngredient${i}`] === "string") {
       ingredients.push(
         <li key={i}>
-          {`${cocktail[`strIngredient${i}`]}: ${cocktail[`strMeasure${i}`]}`}
+          {`${drink[`strIngredient${i}`]}: ${drink[`strMeasure${i}`]}`}
         </li>
       );
     }
@@ -74,7 +74,7 @@ function ingredientList(
   return ingredients;
 }
 
-const Cocktail: React.SFC<CocktailProps> = props => {
+const Drink: React.SFC<DrinkProps> = props => {
   const { data, inList } = props;
   const urlName = data.strDrink
     .replace(/\s/g, "_")
@@ -125,4 +125,4 @@ const Cocktail: React.SFC<CocktailProps> = props => {
   );
 };
 
-export default Cocktail;
+export default Drink;
