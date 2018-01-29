@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router5";
+import { BaseLink } from "react-router5";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { darkPurple, brightPurple } from "../utils/css";
 const logo = require("../assets/cocktail.svg") as string;

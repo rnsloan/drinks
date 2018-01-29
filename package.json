@@ -6,15 +6,33 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=development parcel index.html -p 3000 --hmr-port 45880"
+    "start": "NODE_ENV=development parcel index.html -p 3000 --hmr-port 45880",
+    "test": "jest",
+    "testW": "jest --watch"
+  },
+  "jest": {
+    "roots": ["<rootDir>/src"],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/fileMock.js"
+    },
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   },
   "devDependencies": {
+    "@types/jest": "^22.1.0",
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "jest": "^22.1.4",
     "parcel-bundler": "1.5.0",
+    "react-test-renderer": "^16.2.0",
+    "ts-jest": "^22.0.2",
     "typescript": "^2.6.2"
   },
   "dependencies": {

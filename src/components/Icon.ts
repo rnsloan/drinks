@@ -1,4 +1,3 @@
-import * as React from "react";
 const cocktail = require("../assets/cocktail.svg") as string;
 const cocoa = require("../assets/cocoa.svg") as string;
 const coffee = require("../assets/coffee.svg") as string;
