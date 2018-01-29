@@ -3,9 +3,16 @@ import { ReactHTMLElement, HTMLFactory } from "react";
 import { Link } from "react-router5";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { styles as extraStyles } from "../utils/css";
+import categoryIcon from "./Icon";
 
 const styles = StyleSheet.create({
   listHeading: {
+    fontSize: "36px"
+  },
+  title: {
+    paddingLeft: "40px",
+    background: "no-repeat 0 0",
+    backgroundSize: "contain",
     fontSize: "36px"
   }
 });
@@ -101,7 +108,14 @@ const Drink: React.SFC<DrinkProps> = props => {
 
   return (
     <section>
-      <h2>{data.strDrink}</h2>
+      <h2
+        className={css(styles.title)}
+        style={{
+          backgroundImage: `url(${categoryIcon(data.strCategory)}`
+        }}
+      >
+        {data.strDrink}
+      </h2>
       <h3>
         Alcoholic: {data.strAlcoholic === "Alcoholic" ? "Yes" : "No"}
         <br />
@@ -120,7 +134,17 @@ const Drink: React.SFC<DrinkProps> = props => {
           />
         </p>
       )}
-      {data.strVideo && <a href={data.strVideo}>Video</a>}
+      {data.strVideo ? (
+        <a href={data.strVideo}>Video</a>
+      ) : (
+        <a
+          href={`https://www.youtube.com/results?search_query=${data.strDrink}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Search for drink on YouTube
+        </a>
+      )}
     </section>
   );
 };
