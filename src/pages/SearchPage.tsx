@@ -1,12 +1,13 @@
 import * as React from "react";
 import { StyleSheet, css } from "aphrodite/no-important";
+import * as queryString from "query-string";
 import { getJson } from "../utils/network";
 import DrinksList from "../components/DrinksList";
 import { DrinkInterface } from "../components/Drink";
 import Loader, { wrapper } from "../components/Loader";
 
 const styles = StyleSheet.create({
-  loaderWrapper: { wrapper },
+  loaderWrapper: { ...wrapper },
   query: {
     fontStyle: "italic"
   }
@@ -28,16 +29,25 @@ export default class Search extends React.Component<{}, SearchState> {
     };
   }
   componentDidMount() {
-    const searchQuery = window.location.search.match(/name=(.+)/);
-    if (searchQuery && searchQuery[1]) {
-      const query = searchQuery[1].replace("%20", " ");
-      this.setState({ isLoading: true, query });
+    const searchQuery = queryString.parse(window.location.search);
+    if (searchQuery.name || searchQuery.category) {
+      if (searchQuery.name) {
+        const query = searchQuery.name.replace("%20", " ");
+        const url = `select+*+from+all_drinks+where+strDrink+LIKE+%27%25${encodeURIComponent(
+          query
+        )}%25%27`;
+        this.setState({ isLoading: true, query });
+      }
+
+      if (searchQuery.category) {
+        const query = searchQuery.category;
+        console.log(query);
+        const url = `select+*+from+all_drinks+where+strCategory%3D%27${query}%27`;
+        this.setState({ isLoading: true });
+      }
+
       const data = async () => {
-        let value = await getJson(
-          `select+*+from+all_drinks+where+strDrink+LIKE+%27%25${encodeURIComponent(
-            query
-          )}%25%27`
-        );
+        let value = await getJson(url);
         this.setState({ results: value.rows, isLoading: false });
       };
       data();
@@ -54,12 +64,14 @@ export default class Search extends React.Component<{}, SearchState> {
     if (this.state.results && this.state.results.length > 0) {
       return (
         <div>
-          <h2>
-            Results for{" "}
-            <small className={css(styles.query)}>
-              &lsquo;{this.state.query}&rsquo;
-            </small>
-          </h2>
+          {this.state.query && (
+            <h2>
+              Results for{" "}
+              <small className={css(styles.query)}>
+                &lsquo;{this.state.query}&rsquo;
+              </small>
+            </h2>
+          )}
           <DrinksList data={this.state.results} />
         </div>
       );

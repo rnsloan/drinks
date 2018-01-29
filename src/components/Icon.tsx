@@ -9,36 +9,47 @@ const party = require("../assets/party.svg") as string;
 const shot = require("../assets/shot.svg") as string;
 const soda = require("../assets/soda.svg") as string;
 
+export const categories: Array<string> = [
+  "Ordinary Drink",
+  "Cocktail",
+  "Shot",
+  "Punch / Party Drink",
+  "Other/Unknown",
+  "Coffee / Tea",
+  "Milk / Float / Shake",
+  "Homemade Liqueur",
+  "Soft Drink / Soda",
+  "Cocoa"
+];
+
 const categoryIcon = (category: string) => {
   let icon = other;
   switch (category) {
-    case "Ordinary Drink":
-      break;
-    case "Cocktail":
+    case categories[1]:
       icon = cocktail;
       break;
-    case "Shot":
+    case categories[2]:
       icon = shot;
       break;
-    case "Punch / Party Drink":
+    case categories[3]:
       icon = party;
       break;
-    case "Other/Unknown":
+    case categories[4]:
       icon = other;
       break;
-    case "Coffee / Tea":
+    case categories[5]:
       icon = coffee;
       break;
-    case "Milk / Float / Shake":
+    case categories[6]:
       icon = milk;
       break;
-    case "Homemade Liqueur":
+    case categories[7]:
       icon = liqueur;
       break;
-    case "Soft Drink / Soda":
+    case categories[8]:
       icon = soda;
       break;
-    case "Cocoa":
+    case categories[9]:
       icon = cocoa;
       break;
   }

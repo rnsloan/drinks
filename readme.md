@@ -1,4 +1,6 @@
-Playing around with parceljs, TypeScript, css-in-js
+# Drinks
+
+Testing out some things with parceljs, TypeScript, css-in-js.
 
 ## Backend
 

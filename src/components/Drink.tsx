@@ -7,13 +7,16 @@ import categoryIcon from "./Icon";
 
 const styles = StyleSheet.create({
   listHeading: {
-    fontSize: "36px"
+    fontSize: "24px"
   },
   title: {
-    paddingLeft: "40px",
+    paddingLeft: "45px",
     background: "no-repeat 0 0",
     backgroundSize: "contain",
     fontSize: "36px"
+  },
+  image: {
+    maxWidth: "300px"
   }
 });
 
@@ -116,29 +119,27 @@ const Drink: React.SFC<DrinkProps> = props => {
       >
         {data.strDrink}
       </h2>
-      <h3>
-        Alcoholic: {data.strAlcoholic === "Alcoholic" ? "Yes" : "No"}
-        <br />
-      </h3>
+      {data.strDrinkThumb && (
+        <p>
+          <img
+            className={css(styles.image)}
+            src={data.strDrinkThumb}
+            alt={data.strDrink}
+          />
+        </p>
+      )}
+      <h3>Alcoholic: {data.strAlcoholic === "Alcoholic" ? "Yes" : "No"}</h3>
       <h3>Ingredients:</h3>
       <ul>{ingredientList(props.data)}</ul>
       <h3>Instructions:</h3>
       <p>{data.strInstructions}</p>
-      {data.strDrinkThumb && (
-        <p>
-          <img
-            src={data.strDrinkThumb}
-            alt="data.strDrink"
-            width="100"
-            height="100"
-          />
-        </p>
-      )}
       {data.strVideo ? (
         <a href={data.strVideo}>Video</a>
       ) : (
         <a
-          href={`https://www.youtube.com/results?search_query=${data.strDrink}`}
+          href={`https://www.youtube.com/results?search_query=${
+            data.strDrink
+          } drink`}
           target="_blank"
           rel="noopener noreferrer"
         >

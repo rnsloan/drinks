@@ -4,7 +4,7 @@ import HomePage from "./HomePage";
 import SearchPage from "./SearchPage";
 import DrinkPage from "./DrinkPage";
 
-const NotFound = () => <div>NotFound</div>;
+const NotFound = () => <p>Page Not Found</p>;
 
 const components = {
   home: HomePage,

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     padding: 0
   },
   listItem: {
-    paddingLeft: "40px",
+    paddingLeft: "30px",
     background: "no-repeat 0 0",
     backgroundSize: "contain"
   }
