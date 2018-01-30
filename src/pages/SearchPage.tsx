@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Helmet } from "react-helmet";
 import { StyleSheet, css } from "aphrodite/no-important";
 import * as queryString from "query-string";
 import { getJson } from "../utils/network";
@@ -41,7 +42,6 @@ export default class Search extends React.Component<{}, SearchState> {
 
       if (searchQuery.category) {
         const query = searchQuery.category;
-        console.log(query);
         const url = `select+*+from+all_drinks+where+strCategory%3D%27${query}%27`;
         this.setState({ isLoading: true });
       }
@@ -64,6 +64,13 @@ export default class Search extends React.Component<{}, SearchState> {
     if (this.state.results && this.state.results.length > 0) {
       return (
         <div>
+          <Helmet>
+            <title>Drinks | Search results for {this.state.query}</title>
+            <meta
+              name="description"
+              content={`Search results for ${this.state.query}`}
+            />
+          </Helmet>
           {this.state.query && (
             <h2>
               Results for{" "}

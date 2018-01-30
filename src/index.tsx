@@ -5,7 +5,6 @@ import createRouter from "./router/create-router";
 import App from "./App";
 
 const router = createRouter(true);
-
 router.start(() => {
   ReactDOM.render(
     <RouterProvider router={router}>

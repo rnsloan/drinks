@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Helmet } from "react-helmet";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { withRoute, InjectedRoute } from "react-router5";
 import { getJson } from "../utils/network";
@@ -46,7 +47,15 @@ class DrinkPage extends React.Component<InjectedRoute, SearchState> {
     if (!this.state.result) {
       return <p>Unable to find drink</p>;
     }
-    return <Drink data={this.state.result} />;
+    return (
+      <div>
+        <Helmet>
+          <title>Drinks | {this.state.result.strDrink}</title>
+          <meta name="description" content={this.state.result.strDrink} />
+        </Helmet>
+        <Drink data={this.state.result} />
+      </div>
+    );
   }
 }
 

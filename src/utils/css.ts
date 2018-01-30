@@ -12,11 +12,17 @@ const extended = StyleSheet.extend([globalExtension]);
 
 const globalStyles = extended.StyleSheet.create({
   [GLOBALS]: {
+    html: {
+      margin: 0,
+      body: 0
+    },
     body: {
       background: "rgba(149,118,201,0.1)",
       fontFamily: "Open Sans,Segoe UI,sans-serif",
       webkitFontSmoothing: "antialiased",
-      textRendering: "optimizeLegibility"
+      textRendering: "optimizeLegibility",
+      margin: 0,
+      padding: 0
     },
     "*": {},
     "p, h1, h2, h3, h4, h5, h6, ul, dl, dt, dd": {},
