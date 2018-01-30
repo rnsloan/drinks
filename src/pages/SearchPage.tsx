@@ -18,6 +18,7 @@ interface SearchState {
   results: Array<DrinkInterface> | null;
   isLoading: Boolean;
   query: String;
+  category: String;
 }
 
 export default class Search extends React.Component<{}, SearchState> {
@@ -26,24 +27,26 @@ export default class Search extends React.Component<{}, SearchState> {
     this.state = {
       results: null,
       isLoading: false,
-      query: ""
+      query: "",
+      category: ""
     };
   }
   componentDidMount() {
     const searchQuery = queryString.parse(window.location.search);
     if (searchQuery.name || searchQuery.category) {
+      let url = "";
       if (searchQuery.name) {
         const query = searchQuery.name.replace("%20", " ");
-        const url = `select+*+from+all_drinks+where+strDrink+LIKE+%27%25${encodeURIComponent(
+        url = `select+*+from+all_drinks+where+strDrink+LIKE+%27%25${encodeURIComponent(
           query
         )}%25%27`;
         this.setState({ isLoading: true, query });
       }
 
       if (searchQuery.category) {
-        const query = searchQuery.category;
-        const url = `select+*+from+all_drinks+where+strCategory%3D%27${query}%27`;
-        this.setState({ isLoading: true });
+        const category = searchQuery.category;
+        url = `select+*+from+all_drinks+where+strCategory%3D%27${category}%27`;
+        this.setState({ isLoading: true, category });
       }
 
       const data = async () => {
@@ -62,21 +65,17 @@ export default class Search extends React.Component<{}, SearchState> {
       );
     }
     if (this.state.results && this.state.results.length > 0) {
+      const query = this.state.query || this.state.category;
       return (
         <div>
           <Helmet>
-            <title>Drinks | Search results for {this.state.query}</title>
-            <meta
-              name="description"
-              content={`Search results for ${this.state.query}`}
-            />
+            <title>Drinks | Search results for {query}</title>
+            <meta name="description" content={`Search results for ${query}`} />
           </Helmet>
           {this.state.query && (
             <h2>
               Results for{" "}
-              <small className={css(styles.query)}>
-                &lsquo;{this.state.query}&rsquo;
-              </small>
+              <small className={css(styles.query)}>&lsquo;{query}&rsquo;</small>
             </h2>
           )}
           <DrinksList data={this.state.results} />
