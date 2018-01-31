@@ -3,13 +3,15 @@ import { withRoute } from "react-router5";
 import HomePage from "./HomePage";
 import SearchPage from "./SearchPage";
 import DrinkPage from "./DrinkPage";
+import SignInPage from "./SignInPage";
 
 const NotFound = () => <p>Page Not Found</p>;
 
 const components = {
   home: HomePage,
   search: SearchPage,
-  drink: DrinkPage
+  drink: DrinkPage,
+  signin: SignInPage
 };
 
 const Pages = props => {
