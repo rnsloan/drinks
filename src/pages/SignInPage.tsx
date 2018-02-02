@@ -1,7 +1,17 @@
 import * as React from "react";
 import * as firebase from "firebase/app";
-import Loader from "../components/Loader";
 import "firebase/auth";
+import { StyleSheet, css } from "aphrodite/no-important";
+import Loader from "../components/Loader";
+
+const styles = StyleSheet.create({
+  button: {
+    direction: "ltr",
+    minHeight: "40px",
+    padding: "8px 16px",
+    fontSize: "16px"
+  }
+});
 
 interface SearchFormState {
   user: string;
@@ -67,7 +77,9 @@ export default class SignInPage extends React.Component<{}, SearchFormState> {
   render() {
     let result = (
       <div>
-        <button onClick={this.signIn}>Sign in via Google Account</button>
+        <button className={css(styles.button)} onClick={this.signIn}>
+          Sign in via Google Account
+        </button>
       </div>
     );
     if (this.state.user) {
@@ -79,7 +91,9 @@ export default class SignInPage extends React.Component<{}, SearchFormState> {
             </p>
           )}
           <div>
-            <button onClick={this.signOut}>Sign out</button>
+            <button className={css(styles.button)} onClick={this.signOut}>
+              Sign out
+            </button>
           </div>
         </div>
       );

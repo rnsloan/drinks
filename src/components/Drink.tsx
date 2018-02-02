@@ -3,7 +3,8 @@ import { ReactHTMLElement, HTMLFactory } from "react";
 import { Link } from "react-router5";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { styles as extraStyles } from "../utils/css";
-import categoryIcon from "./Icon";
+import CategoryIcon from "./Icon";
+import Favourite from "./Favourite";
 
 const styles = StyleSheet.create({
   listHeading: {
@@ -13,7 +14,8 @@ const styles = StyleSheet.create({
     paddingLeft: "45px",
     background: "no-repeat 0 0",
     backgroundSize: "contain",
-    fontSize: "36px"
+    fontSize: "36px",
+    display: "inline-block"
   },
   image: {
     maxWidth: "300px"
@@ -114,11 +116,12 @@ const Drink: React.SFC<DrinkProps> = props => {
       <h2
         className={css(styles.title)}
         style={{
-          backgroundImage: `url(${categoryIcon(data.strCategory)}`
+          backgroundImage: `url(${CategoryIcon(data.strCategory)}`
         }}
       >
         {data.strDrink}
       </h2>
+      <Favourite drinkId={data.idDrink} />
       {data.strDrinkThumb && (
         <p>
           <img

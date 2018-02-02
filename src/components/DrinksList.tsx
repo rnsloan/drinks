@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   listItem: {
     paddingLeft: "30px",
     background: "no-repeat 0 0",
-    backgroundSize: "contain"
+    backgroundSize: "21px"
   }
 });
 
