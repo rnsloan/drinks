@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
   }
 });
 
-interface DrinksListProps {
+export interface DrinksListInterface {
   data: Array<DrinkInterface>;
 }
 
-const DrinksList: React.SFC<DrinksListProps> = props => {
+const DrinksList: React.SFC<DrinksListInterface> = props => {
   return (
     <ul className={css(styles.list)}>
       {props.data.map(drink => {
