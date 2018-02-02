@@ -10,12 +10,15 @@ const styles = StyleSheet.create({
   listHeading: {
     fontSize: "24px"
   },
+  heading: {
+    display: "flex",
+    alignItems: "center"
+  },
   title: {
     paddingLeft: "45px",
     background: "no-repeat 0 0",
-    backgroundSize: "contain",
-    fontSize: "36px",
-    display: "inline-block"
+    backgroundSize: "35px",
+    fontSize: "36px"
   },
   image: {
     maxWidth: "300px"
@@ -113,15 +116,17 @@ const Drink: React.SFC<DrinkProps> = props => {
 
   return (
     <section>
-      <h2
-        className={css(styles.title)}
-        style={{
-          backgroundImage: `url(${CategoryIcon(data.strCategory)}`
-        }}
-      >
-        {data.strDrink}
-      </h2>
-      <Favourite drinkId={data.idDrink} />
+      <div className={css(styles.heading)}>
+        <h2
+          className={css(styles.title)}
+          style={{
+            backgroundImage: `url(${CategoryIcon(data.strCategory)}`
+          }}
+        >
+          {data.strDrink}
+        </h2>
+        <Favourite drinkId={data.idDrink} />
+      </div>
       {data.strDrinkThumb && (
         <p>
           <img

@@ -15,10 +15,7 @@ const styles = StyleSheet.create({
     background: "none",
     border: "none",
     transform: "scale(0.8)",
-    transformOrigin: "0 0",
-    position: "relative",
-    top: "11px",
-    left: "4px"
+    transformOrigin: "0 0"
   },
   svgPath: {
     fillOpacity: "1"
@@ -31,7 +28,7 @@ interface State {
 
 interface Props {
   router: Router;
-  drinkId: string;
+  drinkId: number;
 }
 
 class Favourite extends React.Component<Props, State> {
@@ -81,13 +78,16 @@ class Favourite extends React.Component<Props, State> {
   }
 
   render() {
+    const message = this.state.isFavourite
+      ? "Remove from favourites"
+      : "Add to favourites";
     return (
-      <button onClick={this.handleClick} className={css(styles.button)}>
-        <span className={css(extraStyles.hidden)}>
-          {this.state.isFavourite
-            ? "Remove from favourites"
-            : "Add to favourites"}
-        </span>
+      <button
+        title={message}
+        onClick={this.handleClick}
+        className={css(styles.button)}
+      >
+        <span className={css(extraStyles.hidden)}>{message}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={css(styles.svg)}
