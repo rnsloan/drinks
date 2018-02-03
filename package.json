@@ -7,6 +7,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=development parcel index.html -p 3000 --hmr-port 45880",
+    "build": "NODE_ENV=production parcel build index.html --public-url ./",
     "test": "jest",
     "e2e": "node ./e2e/index.js"
   },
