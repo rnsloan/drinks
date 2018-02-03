@@ -15,10 +15,10 @@ const styles = StyleSheet.create({
 });
 
 interface SearchState {
-  results: Array<DrinkInterface> | null;
-  isLoading: Boolean;
-  query: String;
-  category: String;
+  results: DrinkInterface[] | null;
+  isLoading: boolean;
+  query: string;
+  category: string;
 }
 
 export default class Search extends React.Component<{}, SearchState> {

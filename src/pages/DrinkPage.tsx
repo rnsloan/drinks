@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 
 interface SearchState {
   result: DrinkInterface | null;
-  isLoading: Boolean;
+  isLoading: boolean;
 }
 
 class DrinkPage extends React.Component<InjectedRoute, SearchState> {

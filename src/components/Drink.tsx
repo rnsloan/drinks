@@ -71,7 +71,7 @@ export interface DrinkInterface {
 
 interface DrinkProps {
   data: DrinkInterface;
-  inList?: Boolean;
+  inList?: boolean;
 }
 
 function ingredientList(
