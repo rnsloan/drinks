@@ -9,6 +9,22 @@
     <link rel="icon" href="./src/assets/favicon.png">
     <!-- until parceljs supports manifest files -->
     <!--<link rel="manifest" href="./src/manifest.webmanifest">-->
+    <script>
+        if (window.location.hostname != "localhost") {
+            try {
+                const js = document.createElement("script");
+                js.async = true;
+                js.src = "https://www.googletagmanager.com/gtag/js?id=UA-36848509-4";
+                document.getElementsByTagName('head')[0].appendChild(js);
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'UA-36848509-4');
+            } catch (e) { }
+        }
+    </script>
+
     <link href="https://fonts.googleapis.com/css?family=Monoton&text=Drinks" rel="stylesheet">
     <style>
         html {
