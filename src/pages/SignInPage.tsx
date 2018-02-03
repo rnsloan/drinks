@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import Helmet from "react-helmet";
 import { StyleSheet, css } from "aphrodite/no-important";
 import Loader from "../components/Loader";
 
@@ -106,6 +107,14 @@ export default class SignInPage extends React.Component<{}, SearchFormState> {
     if (this.state.loading) {
       result = <Loader />;
     }
-    return result;
+    return (
+      <div>
+        <Helmet>
+          <title>Drinks | Sign in / Sign out</title>
+          <meta name="description" content="Sign in / Sign out" />
+        </Helmet>
+        {result}
+      </div>
+    );
   }
 }

@@ -4,12 +4,13 @@ import "firebase/auth";
 import "firebase/database";
 import { Link } from "react-router5";
 import { StyleSheet, css } from "aphrodite/no-important";
+import Helmet from "react-helmet";
 import { getJson } from "../utils/network";
+import { styles as globalStyles } from "../utils/css";
 import SearchForm from "../components/SearchForm";
 import DrinksList from "../components/DrinksList";
 import { DrinkInterface } from "../components/Drink";
 import categoryIcon, { categories } from "../components/Icon";
-import { styles as globalStyles } from "../utils/css";
 
 const color = "rgba(131,135,162,0.5)";
 const styles = StyleSheet.create({
@@ -89,6 +90,10 @@ class Home extends React.Component<{}, State> {
   render() {
     return (
       <div>
+        <Helmet>
+          <title>Drinks</title>
+          <meta name="description" content="Search for drinks" />
+        </Helmet>
         <SearchForm />
         {this.state.favouritesData && (
           <div>
