@@ -77,6 +77,7 @@ export default class SignInPage extends React.Component<{}, SearchFormState> {
   render() {
     let result = (
       <div>
+        <p>You are not signed in.</p>
         <button className={css(styles.button)} onClick={this.signIn}>
           Sign in via Google Account
         </button>
@@ -86,9 +87,13 @@ export default class SignInPage extends React.Component<{}, SearchFormState> {
       result = (
         <div>
           {this.state.user && (
-            <p>
-              Signed in as: <strong>{this.state.user}</strong>
-            </p>
+            <div>
+              <h2>User</h2>
+              <p>
+                Signed in as: <strong>{this.state.user}</strong>
+              </p>
+              <p>Your favourite drinks are visible on the home page</p>
+            </div>
           )}
           <div>
             <button className={css(styles.button)} onClick={this.signOut}>
@@ -101,11 +106,6 @@ export default class SignInPage extends React.Component<{}, SearchFormState> {
     if (this.state.loading) {
       result = <Loader />;
     }
-    return (
-      <div>
-        <h2>User</h2>
-        {result}
-      </div>
-    );
+    return result;
   }
 }

@@ -12,10 +12,11 @@ const styles = StyleSheet.create({
   },
   heading: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "flex-top"
   },
   title: {
     paddingLeft: "45px",
+    margin: "0 10px 0 0",
     background: "no-repeat 0 0",
     backgroundSize: "35px",
     fontSize: "36px"
@@ -151,7 +152,7 @@ const Drink: React.SFC<DrinkProps> = props => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Search for drink on YouTube
+          Search for {data.strDrink} on YouTube
         </a>
       )}
     </section>

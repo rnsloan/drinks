@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     ":hover": {
       cursor: "pointer"
     },
+    ":focus": {
+      outline: "none"
+    }
     background: "none",
     border: "none",
     transform: "scale(0.8)",

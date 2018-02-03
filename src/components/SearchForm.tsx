@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     ":focus": {
       outline: "none"
     },
+    "-webkit-appearance": "textfield",
     fontSize: "14px"
   }
 });
@@ -54,7 +55,7 @@ class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
           aria-label="Search by drink name"
           className={css(styles.input)}
           type="search"
-          placeholder="Enter drink name e.g. Bloody Mary or Iced Tea"
+          placeholder="e.g. old fashioned"
           onChange={this.handleChange}
         />
       </form>

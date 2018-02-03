@@ -1,6 +1,6 @@
 # Drinks
 
-Testing out some things with parceljs, TypeScript, css-in-js, firebase.
+Testing out some things with parceljs, TypeScript, css-in-js, Firebase.
 
 ## Backend
 
