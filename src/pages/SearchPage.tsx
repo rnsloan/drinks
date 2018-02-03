@@ -49,11 +49,12 @@ export default class Search extends React.Component<{}, SearchState> {
         this.setState({ isLoading: true, category });
       }
 
-      const data = async () => {
-        let value = await getJson(url);
-        this.setState({ results: value.rows, isLoading: false });
-      };
-      data();
+      (async () => {
+        try {
+          const value = await getJson(url);
+          this.setState({ results: value.rows, isLoading: false });
+        } catch (e) {}
+      })();
     }
   }
   render() {

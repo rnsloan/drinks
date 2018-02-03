@@ -27,13 +27,14 @@ class DrinkPage extends React.Component<InjectedRoute, SearchState> {
     const drinkId = this.props.route.path.match(/[0-9]+/);
     if (drinkId) {
       this.setState({ isLoading: true });
-      const data = async () => {
-        let value = await getJson(
-          `select+*+from+all_drinks+where+idDrink%3D${drinkId}`
-        );
-        this.setState({ result: value.rows[0], isLoading: false });
-      };
-      data();
+      (async () => {
+        try {
+          let value = await getJson(
+            `select+*+from+all_drinks+where+idDrink%3D${drinkId}`
+          );
+          this.setState({ result: value.rows[0], isLoading: false });
+        } catch (e) {}
+      })();
     }
   }
   render() {

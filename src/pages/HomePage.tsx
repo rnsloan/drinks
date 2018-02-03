@@ -68,19 +68,20 @@ class Home extends React.Component<{}, State> {
                 }
               }
             );
-            const data = async () => {
-              let value = await getJson(
-                `select+*+from+all_drinks+where+idDrink+IN+%28${favouritesTrue.join(
-                  "%2C+"
-                )}%29`
-              );
-              if (value.rows.length) {
-                this.setState({
-                  favouritesData: value.rows
-                });
-              }
-            };
-            data();
+            (async () => {
+              try {
+                const value = await getJson(
+                  `select+*+from+all_drinks+where+idDrink+IN+%28${favouritesTrue.join(
+                    "%2C+"
+                  )}%29`
+                );
+                if (value.rows.length) {
+                  this.setState({
+                    favouritesData: value.rows
+                  });
+                }
+              } catch (e) {}
+            })();
           });
       }
     });

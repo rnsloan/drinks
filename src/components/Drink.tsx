@@ -132,7 +132,7 @@ const Drink: React.SFC<DrinkProps> = props => {
         <p>
           <img
             className={css(styles.image)}
-            src={data.strDrinkThumb}
+            src={data.strDrinkThumb.replace("http://", "https://")}
             alt={data.strDrink}
           />
         </p>
