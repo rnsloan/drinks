@@ -53,7 +53,7 @@ export default class Search extends React.Component<{}, SearchState> {
         try {
           const value = await getJson(url);
           this.setState({ results: value.rows, isLoading: false });
-        } catch (e) {}
+        } catch (e) { }
       })();
     }
   }

@@ -81,7 +81,7 @@ class Home extends React.Component<{}, State> {
                     favouritesData: value.rows
                   });
                 }
-              } catch (e) {}
+              } catch (e) { }
             })();
           });
       }

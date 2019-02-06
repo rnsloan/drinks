@@ -11,6 +11,9 @@
     "test": "jest",
     "e2e": "node ./e2e/index.js"
   },
+  "browserslist": [
+    "since 2019-01"
+  ],
   "jest": {
     "roots": [
       "<rootDir>/src"
@@ -32,27 +35,29 @@
     ]
   },
   "devDependencies": {
+    "@firebase/app-types": "^0.3.3",
     "@types/aphrodite": "^0.5.6",
-    "@types/jest": "^22.1.1",
+    "@types/jest": "^24.0.0",
     "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-react": "^6.24.1",
-    "jest": "^22.1.4",
-    "parcel-bundler": "1.10.3",
+    "jest": "^23.0.0",
+    "parcel-bundler": "1.11.0",
     "puppeteer": "^1.0.0",
     "react-test-renderer": "^16.2.0",
-    "ts-jest": "^22.0.2",
-    "typescript": "^2.7.1"
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.3.1"
   },
   "dependencies": {
-    "aphrodite": "^1.2.5",
-    "firebase": "^4.9.1",
-    "query-string": "^5.0.1",
+    "aphrodite": "^2.2.3",
+    "firebase": "^5.8.2",
+    "query-string": "^6.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
-    "react-router5": "^5.4.2",
-    "router5": "^5.8.0"
+    "react-router5": "^7.0.2",
+    "router5": "^7.0.1",
+    "router5-plugin-browser": "^7.0.1",
+    "router5-plugin-listeners": "^7.0.1",
+    "router5-plugin-logger": "^7.0.1"
   }
 }
