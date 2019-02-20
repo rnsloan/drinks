@@ -11,15 +11,15 @@ const styles = StyleSheet.create({
     fontSize: "24px"
   },
   heading: {
-    display: "flex",
-    alignItems: "flex-top"
+    display: "flex"
   },
   title: {
     paddingLeft: "45px",
     margin: "0 10px 0 0",
     background: "no-repeat 0 0",
     backgroundSize: "35px",
-    fontSize: "36px"
+    fontSize: "36px",
+    lineHeight: "1.5"
   },
   image: {
     maxWidth: "300px"
@@ -145,16 +145,16 @@ const Drink: React.FunctionComponent<DrinkProps> = props => {
       {data.strVideo ? (
         <a href={data.strVideo}>Video</a>
       ) : (
-          <a
-            href={`https://www.youtube.com/results?search_query=${
-              data.strDrink
-              } drink`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Search for {data.strDrink} on YouTube
+        <a
+          href={`https://www.youtube.com/results?search_query=${
+            data.strDrink
+          } drink`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Search for {data.strDrink} on YouTube
         </a>
-        )}
+      )}
     </section>
   );
 };

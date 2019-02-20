@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const SearchForm: React.FunctionComponent<{ router: Router }> = (props) => {
-  const [search, setSearch] = React.useState("")
+const SearchForm: React.FunctionComponent<{ router?: Router }> = props => {
+  const [search, setSearch] = React.useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +46,6 @@ const SearchForm: React.FunctionComponent<{ router: Router }> = (props) => {
       />
     </form>
   );
-}
+};
 
 export default withRoute(SearchForm);

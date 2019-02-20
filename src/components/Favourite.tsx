@@ -16,39 +16,39 @@ const styles = StyleSheet.create({
     },
     ":focus": {
       outline: "none"
-    }
+    },
     background: "none",
     border: "none",
     transform: "scale(0.8)",
     transformOrigin: "0 0"
   },
   svgPath: {
-    fillOpacity: "1"
+    fillOpacity: 1
   }
 });
 
-const checkIfFavourite = async (drinkId) => {
+const checkIfFavourite = async drinkId => {
   return await firebase
     .database()
     .ref(`users/${firebase.auth().currentUser.uid}`)
-    .once("value")
-}
+    .once("value");
+};
 
 interface Props {
-  router: Router;
+  router?: Router;
   drinkId: number;
 }
 
-const Favourite: React.FunctionComponent<Props> = (props) => {
-  const [isFavourite, setAsFavourite] = React.useState(false)
+const Favourite: React.FunctionComponent<Props> = props => {
+  const [isFavourite, setAsFavourite] = React.useState(false);
 
   useAsyncEffect(
     async () => {
       await getUserStatus();
-      const isFav = await checkIfFavourite(props.drinkId)
+      const isFav = await checkIfFavourite(props.drinkId);
       isFav ? setAsFavourite(true) : setAsFavourite(false);
     },
-    () =>{},
+    () => {},
     [props.drinkId]
   );
 
@@ -62,15 +62,13 @@ const Favourite: React.FunctionComponent<Props> = (props) => {
         .ref(`users/${firebase.auth().currentUser.uid}`)
         .set({
           [props.drinkId]: !isFavourite
-        })
+        });
 
       setAsFavourite(!isFavourite);
     }
-  }
+  };
 
-  const message = isFavourite
-    ? "Remove from favourites"
-    : "Add to favourites";
+  const message = isFavourite ? "Remove from favourites" : "Add to favourites";
 
   return (
     <button
@@ -81,7 +79,6 @@ const Favourite: React.FunctionComponent<Props> = (props) => {
       <span className={css(extraStyles.hidden)}>{message}</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={css(styles.svg)}
         viewBox="0 0 50 42"
         width="50"
         height="42"
@@ -98,6 +95,6 @@ const Favourite: React.FunctionComponent<Props> = (props) => {
       </svg>
     </button>
   );
-}
+};
 
 export default withRoute(Favourite);
