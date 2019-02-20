@@ -14,12 +14,12 @@ const styles = StyleSheet.create({
   }
 });
 
-interface SearchFormState {
+interface ISearchFormState {
   user: string;
   loading: boolean;
 }
 
-export default class SignInPage extends React.Component<{}, SearchFormState> {
+export default class SignInPage extends React.Component<{}, ISearchFormState> {
   constructor(props) {
     super(props);
     this.state = {
