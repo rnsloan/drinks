@@ -11,7 +11,7 @@ import getUserStatus from "../utils/getUserStatus";
 import { styles as globalStyles } from "../utils/css";
 import SearchForm from "../components/SearchForm";
 import DrinksList from "../components/DrinksList";
-import { DrinkInterface } from "../components/Drink";
+import { IDrink } from "../components/Drink";
 import categoryIcon, { categories } from "../components/Icon";
 
 const color = "rgba(131,135,162,0.5)";
@@ -80,9 +80,9 @@ const getFavourites = async (user: firebase.User | false) => {
 };
 
 const Home: React.FunctionComponent<{}> = () => {
-  const [favouritesData, setFavourites] = React.useState<
-    Array<DrinkInterface> | []
-  >([]);
+  const [favouritesData, setFavourites] = React.useState<Array<IDrink> | []>(
+    []
+  );
 
   useAsyncEffect(
     async () => {

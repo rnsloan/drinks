@@ -1,5 +1,5 @@
 import * as React from "react";
-import Drink, { DrinkInterface } from "./Drink";
+import Drink, { IDrink } from "./Drink";
 import { StyleSheet, css } from "aphrodite/no-important";
 import categoryIcon from "./Icon";
 
@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export interface DrinksListInterface {
-  data: Array<DrinkInterface>;
+export interface IDrinksList {
+  data: Array<IDrink>;
 }
 
-const DrinksList: React.FunctionComponent<DrinksListInterface> = props => {
+const DrinksList: React.FunctionComponent<IDrinksList> = props => {
   return (
     <ul className={css(styles.list)}>
       {props.data.map(drink => {

@@ -5,7 +5,7 @@ import { useAsyncEffect } from "use-async-effect";
 import * as queryString from "query-string";
 import { getJson } from "../utils/network";
 import DrinksList from "../components/DrinksList";
-import { DrinkInterface } from "../components/Drink";
+import { IDrink } from "../components/Drink";
 import Loader, { wrapper } from "../components/Loader";
 
 const styles = StyleSheet.create({
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 const Search: React.FunctionComponent<{}> = props => {
   const [isLoading, setLoading] = React.useState(true);
-  const [results, setResults] = React.useState<DrinkInterface[] | null>(null);
+  const [results, setResults] = React.useState<IDrink[] | null>(null);
   const [query, setQuery] = React.useState("");
 
   const searchQuery = queryString.parse(window.location.search);

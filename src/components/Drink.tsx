@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export interface DrinkInterface {
+export interface IDrink {
   strDrink: string;
   idDrink: number;
   dateModified: Date;
@@ -69,14 +69,12 @@ export interface DrinkInterface {
   strVideo: string | null;
 }
 
-interface DrinkProps {
-  data: DrinkInterface;
+interface IDrinkProps {
+  data: IDrink;
   inList?: boolean;
 }
 
-function ingredientList(
-  drink: DrinkInterface
-): Array<HTMLFactory<HTMLLIElement>> {
+function ingredientList(drink: IDrink): Array<HTMLFactory<HTMLLIElement>> {
   const ingredients = [];
   for (let i = 1, len = 15; i < len; i++) {
     if (typeof drink[`strIngredient${i}`] === "string") {
@@ -90,7 +88,7 @@ function ingredientList(
   return ingredients;
 }
 
-const Drink: React.FunctionComponent<DrinkProps> = props => {
+const Drink: React.FunctionComponent<IDrinkProps> = props => {
   const { data, inList } = props;
   const urlName = data.strDrink
     .replace(/\s/g, "_")

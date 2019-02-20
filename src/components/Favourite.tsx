@@ -34,12 +34,12 @@ const checkIfFavourite = async drinkId => {
     .once("value");
 };
 
-interface Props {
+interface IProps {
   router?: Router;
   drinkId: number;
 }
 
-const Favourite: React.FunctionComponent<Props> = props => {
+const Favourite: React.FunctionComponent<IProps> = props => {
   const [isFavourite, setAsFavourite] = React.useState(false);
 
   useAsyncEffect(

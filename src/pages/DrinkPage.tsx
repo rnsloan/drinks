@@ -4,7 +4,7 @@ import { useAsyncEffect } from "use-async-effect";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { withRoute, InjectedRoute } from "react-router5";
 import { getJson } from "../utils/network";
-import Drink, { DrinkInterface } from "../components/Drink";
+import Drink, { IDrink } from "../components/Drink";
 import Loader, { wrapper } from "../components/Loader";
 import DrinksList from "../components/DrinksList";
 
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   loaderWrapper: wrapper
 });
 
-const useDrinkId = async (drinkId: string): Promise<DrinkInterface | null> => {
+const useDrinkId = async (drinkId: string): Promise<IDrink | null> => {
   if (drinkId) {
     try {
       let value = await getJson(
