@@ -1,63 +1,65 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
+import { useAsyncEffect } from "use-async-effect";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { withRoute, InjectedRoute } from "react-router5";
 import { getJson } from "../utils/network";
 import Drink, { DrinkInterface } from "../components/Drink";
 import Loader, { wrapper } from "../components/Loader";
+import DrinksList from "../components/DrinksList";
 
 const styles = StyleSheet.create({
   loaderWrapper: wrapper
 });
 
-interface SearchState {
-  result: DrinkInterface | null;
-  isLoading: boolean;
-}
-
-class DrinkPage extends React.Component<InjectedRoute, SearchState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      result: null,
-      isLoading: false
-    };
-  }
-  componentDidMount() {
-    const drinkId = this.props.route.path.match(/[0-9]+/);
-    if (drinkId) {
-      this.setState({ isLoading: true });
-      (async () => {
-        try {
-          let value = await getJson(
-            `select+*+from+all_drinks+where+idDrink%3D${drinkId}`
-          );
-          this.setState({ result: value.rows[0], isLoading: false });
-        } catch (e) {}
-      })();
-    }
-  }
-  render() {
-    if (this.state.isLoading) {
-      return (
-        <div className={css(styles.loaderWrapper)}>
-          <Loader />
-        </div>
+const useDrinkId = async (drinkId: string): Promise<DrinkInterface | null> => {
+  if (drinkId) {
+    try {
+      let value = await getJson(
+        `select+*+from+all_drinks+where+idDrink%3D${drinkId}`
       );
+      return value.rows[0];
+    } catch (e) {
+      return null;
     }
-    if (!this.state.result) {
-      return <p>Unable to find drink</p>;
-    }
+  }
+};
+
+const DrinkPage: React.FunctionComponent<InjectedRoute> = props => {
+  const [result, setResult] = React.useState(null);
+  const [isLoading, setLoading] = React.useState(false);
+
+  useAsyncEffect(
+    async () => {
+      setLoading(true);
+      const drinkId = props.route.path.match(/[0-9]+/);
+      const drink = await useDrinkId(drinkId);
+      setResult(drink);
+      setLoading(false);
+    },
+    () => {},
+    []
+  );
+
+  if (isLoading) {
     return (
-      <div>
-        <Helmet>
-          <title>Drinks | {this.state.result.strDrink}</title>
-          <meta name="description" content={this.state.result.strDrink} />
-        </Helmet>
-        <Drink data={this.state.result} />
+      <div className={css(styles.loaderWrapper)}>
+        <Loader />
       </div>
     );
   }
-}
+  if (!result) {
+    return <p>Unable to find drink</p>;
+  }
+  return (
+    <div>
+      <Helmet>
+        <title>Drinks | {result.strDrink}</title>
+        <meta name="description" content={result.strDrink} />
+      </Helmet>
+      <Drink data={result} />
+    </div>
+  );
+};
 
 export default withRoute(DrinkPage);

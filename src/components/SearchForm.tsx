@@ -20,47 +20,32 @@ const styles = StyleSheet.create({
   }
 });
 
-interface SearchFormProps {
-  router: Router;
-}
+const SearchForm: React.FunctionComponent<{ router: Router }> = (props) => {
+  const [search, setSearch] = React.useState("")
 
-interface SearchFormState {
-  search: string;
-}
-
-class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: ""
-    };
-  }
-
-  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (this.state.search === "") return;
-    this.props.router.navigate("search", {
-      name: this.state.search
+    if (search === "") return;
+    props.router.navigate("search", {
+      name: search
     });
   };
 
-  handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ search: e.currentTarget.value });
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearch(e.currentTarget.value);
   };
 
-  render() {
-    return (
-      <form className={css(styles.form)} onSubmit={this.handleSubmit}>
-        <input
-          aria-label="Search by drink name"
-          className={css(styles.input)}
-          type="search"
-          placeholder="e.g. old fashioned"
-          onChange={this.handleChange}
-        />
-      </form>
-    );
-  }
+  return (
+    <form className={css(styles.form)} onSubmit={handleSubmit}>
+      <input
+        aria-label="Search by drink name"
+        className={css(styles.input)}
+        type="search"
+        placeholder="e.g. old fashioned"
+        onChange={handleChange}
+      />
+    </form>
+  );
 }
 
 export default withRoute(SearchForm);

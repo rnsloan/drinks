@@ -90,7 +90,7 @@ function ingredientList(
   return ingredients;
 }
 
-const Drink: React.SFC<DrinkProps> = props => {
+const Drink: React.FunctionComponent<DrinkProps> = props => {
   const { data, inList } = props;
   const urlName = data.strDrink
     .replace(/\s/g, "_")
@@ -145,16 +145,16 @@ const Drink: React.SFC<DrinkProps> = props => {
       {data.strVideo ? (
         <a href={data.strVideo}>Video</a>
       ) : (
-        <a
-          href={`https://www.youtube.com/results?search_query=${
-            data.strDrink
-          } drink`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Search for {data.strDrink} on YouTube
+          <a
+            href={`https://www.youtube.com/results?search_query=${
+              data.strDrink
+              } drink`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Search for {data.strDrink} on YouTube
         </a>
-      )}
+        )}
     </section>
   );
 };

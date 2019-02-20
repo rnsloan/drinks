@@ -5,7 +5,9 @@ import "firebase/database";
 import { Link } from "react-router5";
 import { StyleSheet, css } from "aphrodite/no-important";
 import Helmet from "react-helmet";
+import { useAsyncEffect } from "use-async-effect";
 import { getJson } from "../utils/network";
+import getUserStatus from "../utils/getUserStatus";
 import { styles as globalStyles } from "../utils/css";
 import SearchForm from "../components/SearchForm";
 import DrinksList from "../components/DrinksList";
@@ -44,87 +46,90 @@ const styles = StyleSheet.create({
   }
 });
 
-interface State {
-  favouritesData?: Array<DrinkInterface>;
-}
+const getFavourites = async (user: firebase.User | false) => {
+  if (user) {
+    try {
+      const snapshot = await firebase
+        .database()
+        .ref(`users/${user.uid}`)
+        .once("value");
 
-class Home extends React.Component<{}, State> {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        firebase
-          .database()
-          .ref(`users/${firebase.auth().currentUser.uid}`)
-          .once("value")
-          .then(snapshot => {
-            const favourites = snapshot.val();
-            const favouritesTrue: Array<number> = Object.keys(favourites).map(
-              drinkId => {
-                if (snapshot.val()[drinkId]) {
-                  return parseInt(drinkId, 10);
-                }
-              }
-            );
-            (async () => {
-              try {
-                const value = await getJson(
-                  `select+*+from+all_drinks+where+idDrink+IN+%28${favouritesTrue.join(
-                    "%2C+"
-                  )}%29`
-                );
-                if (value.rows.length) {
-                  this.setState({
-                    favouritesData: value.rows
-                  });
-                }
-              } catch (e) { }
-            })();
-          });
+      const favourites = snapshot.val();
+      const favouritesTrue: Array<number> = Object.keys(favourites).map(
+        drinkId => {
+          if (snapshot.val()[drinkId]) {
+            return parseInt(drinkId, 10);
+          }
+        }
+      );
+
+      const value = await getJson(
+        `select+*+from+all_drinks+where+idDrink+IN+%28${favouritesTrue.join(
+          "%2C+"
+        )}%29`
+      );
+
+      if (value.rows.length) {
+        return value.rows;
       }
-    });
+      return [];
+    } catch (e) {
+      console.log(e);
+    }
   }
-  render() {
-    return (
-      <div>
-        <Helmet>
-          <title>Drinks</title>
-          <meta name="description" content="Search for drinks" />
-        </Helmet>
-        <SearchForm />
-        {this.state.favouritesData && (
-          <div>
-            <h3>Your Favourites</h3>
-            <DrinksList data={this.state.favouritesData} />
-          </div>
-        )}
-        <hr />
-        <h2 className={css(globalStyles.hidden)}>Or by category</h2>
-        <div className={css(styles.categories)}>
-          {categories.map((category, i) => {
-            return (
-              <Link
-                key={i}
-                className={css(styles.categoryLink)}
-                routeName="search"
-                routeParams={{ category }}
-              >
-                <img
-                  className={css(styles.categoryImage)}
-                  src={categoryIcon(category)}
-                  role="presentation"
-                />
-                <div className={css(styles.categoryText)}>{category}</div>
-              </Link>
-            );
-          })}
+};
+
+const Home: React.FunctionComponent<{}> = () => {
+  const [favouritesData, setFavourites] = React.useState<
+    Array<DrinkInterface> | []
+  >([]);
+
+  useAsyncEffect(
+    async () => {
+      const user = await getUserStatus();
+      const favourites = await getFavourites(user);
+      setFavourites(favourites);
+    },
+    () => {},
+    []
+  );
+
+  return (
+    <div>
+      <Helmet>
+        <title>Drinks</title>
+        <meta name="description" content="Search for drinks" />
+      </Helmet>
+      <SearchForm />
+      {favouritesData && (
+        <div>
+          <h3>Your Favourites</h3>
+          <DrinksList data={favouritesData} />
         </div>
+      )}
+      <hr />
+      <h2 className={css(globalStyles.hidden)}>Or by category</h2>
+      <div className={css(styles.categories)}>
+        {categories.map((category, i) => {
+          return (
+            <Link
+              key={i}
+              className={css(styles.categoryLink)}
+              routeName="search"
+              routeParams={{ category }}
+            >
+              <img
+                className={css(styles.categoryImage)}
+                src={categoryIcon(category)}
+                role="presentation"
+              />
+              <div className={css(styles.categoryText)}>{category}</div>
+            </Link>
+          );
+        })}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Home;

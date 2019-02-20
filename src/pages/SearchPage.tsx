@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { StyleSheet, css } from "aphrodite/no-important";
+import { useAsyncEffect } from "use-async-effect";
 import * as queryString from "query-string";
 import { getJson } from "../utils/network";
 import DrinksList from "../components/DrinksList";
@@ -14,75 +15,59 @@ const styles = StyleSheet.create({
   }
 });
 
-interface SearchState {
-  results: DrinkInterface[] | null;
-  isLoading: boolean;
-  query: string;
-  category: string;
-}
+const Search: React.FunctionComponent<{}> = props => {
+  const [isLoading, setLoading] = React.useState(true);
+  const [results, setResults] = React.useState<DrinkInterface[] | null>(null);
+  const [query, setQuery] = React.useState("");
 
-export default class Search extends React.Component<{}, SearchState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      results: null,
-      isLoading: false,
-      query: "",
-      category: ""
-    };
-  }
-  componentDidMount() {
-    const searchQuery = queryString.parse(window.location.search);
-    if (searchQuery.name || searchQuery.category) {
+  const searchQuery = queryString.parse(window.location.search);
+  useAsyncEffect(
+    async () => {
+      let q: string;
       let url = "";
       if (searchQuery.name) {
-        const query = searchQuery.name.replace("%20", " ");
+        q = searchQuery.name.replace("%20", " ");
         url = `select+*+from+all_drinks+where+strDrink+LIKE+%27%25${encodeURIComponent(
-          query
+          q
         )}%25%27`;
-        this.setState({ isLoading: true, query });
+      } else {
+        q = searchQuery.category;
+        url = `select+*+from+all_drinks+where+strCategory%3D%27${q}%27`;
       }
+      setQuery(q);
+      const value = await getJson(url);
+      setResults(value.rows);
+      setLoading(false);
+    },
+    () => {},
+    [searchQuery.name, searchQuery.category]
+  );
 
-      if (searchQuery.category) {
-        const category = searchQuery.category;
-        url = `select+*+from+all_drinks+where+strCategory%3D%27${category}%27`;
-        this.setState({ isLoading: true, category });
-      }
+  if (isLoading) {
+    return (
+      <div className={css(styles.loaderWrapper)}>
+        <Loader />
+      </div>
+    );
+  }
+  if (results && results.length > 0) {
+    return (
+      <div>
+        <Helmet>
+          <title>Drinks | Search results for {query}</title>
+          <meta name="description" content={`Search results for ${query}`} />
+        </Helmet>
+        {query && (
+          <h2>
+            Results for{" "}
+            <small className={css(styles.query)}>&lsquo;{query}&rsquo;</small>
+          </h2>
+        )}
+        <DrinksList data={results} />
+      </div>
+    );
+  }
+  return <p>No results</p>;
+};
 
-      (async () => {
-        try {
-          const value = await getJson(url);
-          this.setState({ results: value.rows, isLoading: false });
-        } catch (e) { }
-      })();
-    }
-  }
-  render() {
-    if (this.state.isLoading) {
-      return (
-        <div className={css(styles.loaderWrapper)}>
-          <Loader />
-        </div>
-      );
-    }
-    if (this.state.results && this.state.results.length > 0) {
-      const query = this.state.query || this.state.category;
-      return (
-        <div>
-          <Helmet>
-            <title>Drinks | Search results for {query}</title>
-            <meta name="description" content={`Search results for ${query}`} />
-          </Helmet>
-          {this.state.query && (
-            <h2>
-              Results for{" "}
-              <small className={css(styles.query)}>&lsquo;{query}&rsquo;</small>
-            </h2>
-          )}
-          <DrinksList data={this.state.results} />
-        </div>
-      );
-    }
-    return <p>No results</p>;
-  }
-}
+export default Search;

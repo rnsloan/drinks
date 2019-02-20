@@ -20,7 +20,7 @@ export interface DrinksListInterface {
   data: Array<DrinkInterface>;
 }
 
-const DrinksList: React.SFC<DrinksListInterface> = props => {
+const DrinksList: React.FunctionComponent<DrinksListInterface> = props => {
   return (
     <ul className={css(styles.list)}>
       {props.data.map(drink => {
