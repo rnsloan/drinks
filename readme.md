@@ -1,6 +1,6 @@
 # Drinks
 
-Testing out some things with parceljs, TypeScript, css-in-js, Firebase.
+Testing out some things with the React Hooks api, parceljs, TypeScript, css-in-js, Firebase.
 
 ![screenshot](https://user-images.githubusercontent.com/2513462/35766464-5fa2de40-092d-11e8-862d-e24e9642ef5d.jpg)
 
