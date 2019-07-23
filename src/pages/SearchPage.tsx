@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { StyleSheet, css } from "aphrodite/no-important";
-import { useAsyncEffect } from "use-async-effect";
 import * as queryString from "query-string";
 import { getJson } from "../utils/network";
 import DrinksList from "../components/DrinksList";
@@ -21,8 +20,9 @@ const Search: React.FunctionComponent<{}> = props => {
   const [query, setQuery] = React.useState("");
 
   const searchQuery = queryString.parse(window.location.search);
-  useAsyncEffect(
-    async () => {
+
+  React.useEffect(() => {
+    const init = async () => {
       let q: string;
       let url = "";
       if (searchQuery.name) {
@@ -38,10 +38,9 @@ const Search: React.FunctionComponent<{}> = props => {
       const value = await getJson(url);
       setResults(value.rows);
       setLoading(false);
-    },
-    () => {},
-    [searchQuery.name, searchQuery.category]
-  );
+    };
+    init();
+  }, [searchQuery.name, searchQuery.category]);
 
   if (isLoading) {
     return (

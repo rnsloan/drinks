@@ -2,7 +2,6 @@ import * as React from "react";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-import { useAsyncEffect } from "use-async-effect";
 import getUserStatus from "../utils/getUserStatus";
 import { withRoute } from "react-router5";
 import { Router } from "router5";
@@ -42,15 +41,14 @@ interface IProps {
 const Favourite: React.FunctionComponent<IProps> = props => {
   const [isFavourite, setAsFavourite] = React.useState(false);
 
-  useAsyncEffect(
-    async () => {
+  React.useEffect(() => {
+    const init = async () => {
       await getUserStatus();
       const isFav = await checkIfFavourite(props.drinkId);
       isFav ? setAsFavourite(true) : setAsFavourite(false);
-    },
-    () => {},
-    [props.drinkId]
-  );
+    };
+    init();
+  }, [props.drinkId]);
 
   const handleClick = async (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
