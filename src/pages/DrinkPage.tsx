@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { useAsyncEffect } from "use-async-effect";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { withRoute, InjectedRoute } from "react-router5";
 import { getJson } from "../utils/network";
@@ -29,17 +28,16 @@ const DrinkPage: React.FunctionComponent<InjectedRoute> = props => {
   const [result, setResult] = React.useState(null);
   const [isLoading, setLoading] = React.useState(false);
 
-  useAsyncEffect(
-    async () => {
+  React.useEffect(() => {
+    const init = async () => {
       setLoading(true);
       const drinkId = props.route.path.match(/[0-9]+/);
       const drink = await useDrinkId(drinkId);
       setResult(drink);
       setLoading(false);
-    },
-    () => {},
-    []
-  );
+    };
+    init();
+  }, []);
 
   if (isLoading) {
     return (

@@ -5,7 +5,6 @@ import "firebase/database";
 import { Link } from "react-router5";
 import { StyleSheet, css } from "aphrodite/no-important";
 import Helmet from "react-helmet";
-import { useAsyncEffect } from "use-async-effect";
 import { getJson } from "../utils/network";
 import getUserStatus from "../utils/getUserStatus";
 import { styles as globalStyles } from "../utils/css";
@@ -84,15 +83,14 @@ const Home: React.FunctionComponent<{}> = () => {
     []
   );
 
-  useAsyncEffect(
-    async () => {
+  React.useEffect(() => {
+    const init = async () => {
       const user = await getUserStatus();
       const favourites = await getFavourites(user);
       setFavourites(favourites);
-    },
-    () => {},
-    []
-  );
+    };
+    init();
+  }, []);
 
   return (
     <div>

@@ -58,7 +58,6 @@
     "router5": "^7.0.1",
     "router5-plugin-browser": "^7.0.1",
     "router5-plugin-listeners": "^7.0.1",
-    "router5-plugin-logger": "^7.0.1",
-    "use-async-effect": "^2.0.0"
+    "router5-plugin-logger": "^7.0.1"
   }
 }
