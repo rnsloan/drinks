@@ -4,6 +4,7 @@
 .cache
 dist
 test.json
+.parcel-cache
 
 # Logs
 logs
