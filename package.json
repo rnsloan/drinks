@@ -1,13 +1,13 @@
 {
   "name": "drinks",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.html",
   "author": "rnsloan1@gmail.com",
   "license": "MIT",
   "private": true,
   "scripts": {
     "start": "NODE_ENV=development parcel index.html -p 3000 --hmr-port 45880",
-    "build": "NODE_ENV=production parcel build index.html --public-url ./",
+    "build": "NODE_ENV=production parcel build index.html",
     "test": "jest",
     "e2e": "node ./e2e/index.js"
   },
@@ -35,29 +35,29 @@
     ]
   },
   "devDependencies": {
-    "@firebase/app-types": "^0.3.3",
-    "@types/aphrodite": "^0.5.13",
-    "@types/jest": "^24.0.15",
-    "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.4",
-    "jest": "^24.8.0",
-    "parcel-bundler": "^1.12.3",
-    "puppeteer": "^1.12.2",
-    "react-test-renderer": "^16.8.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.3.1"
+    "@firebase/app-types": "^0.4.9",
+    "@types/aphrodite": "^2.0.0",
+    "@types/jest": "^24.0.23",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "jest": "^24.9.0",
+    "parcel": "^2.0.0-alpha.3.2",
+    "puppeteer": "^2.0.0",
+    "react-test-renderer": "^16.12.0",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.3"
   },
   "dependencies": {
-    "aphrodite": "^2.2.3",
-    "firebase": "^5.8.2",
-    "query-string": "^6.2.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-helmet": "^5.2.0",
-    "react-router5": "^7.0.2",
-    "router5": "^7.0.1",
-    "router5-plugin-browser": "^7.0.1",
-    "router5-plugin-listeners": "^7.0.1",
-    "router5-plugin-logger": "^7.0.1"
+    "aphrodite": "^2.4.0",
+    "firebase": "^7.5.2",
+    "query-string": "^6.9.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
+    "react-router5": "^7.1.0",
+    "router5": "^7.0.2",
+    "router5-plugin-browser": "^7.0.2",
+    "router5-plugin-listeners": "^7.0.2",
+    "router5-plugin-logger": "^7.0.2"
   }
 }
