@@ -1,18 +1,17 @@
 {
   "name": "drinks",
   "version": "1.0.0",
-  "main": "dist/index.html",
   "author": "rnsloan1@gmail.com",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=development parcel index.html -p 3000 --hmr-port 45880",
+    "start": "NODE_ENV=development parcel index.html -p 3000",
     "build": "NODE_ENV=production parcel build index.html",
     "test": "jest",
     "e2e": "node ./e2e/index.js"
   },
   "browserslist": [
-    "since 2019-01"
+    "since 2020-01"
   ],
   "jest": {
     "roots": [
@@ -41,7 +40,7 @@
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
     "jest": "^24.9.0",
-    "parcel": "^2.0.0-alpha.3.2",
+    "parcel": "2.0.0-nightly.344",
     "puppeteer": "^2.0.0",
     "react-test-renderer": "^16.12.0",
     "ts-jest": "^24.2.0",
