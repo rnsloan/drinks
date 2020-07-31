@@ -6,6 +6,6 @@ Testing out some things with the React Hooks api, parceljs, TypeScript, css-in-j
 
 ## Backend
 
-Data from kaggle [https://www.kaggle.com/ai-first/cocktail-ingredients](https://www.kaggle.com/ai-first/cocktail-ingredients). Read-only using [datasette](https://github.com/simonw/datasette) deployed on [zeit](https://zeit.co/now).
+Data from kaggle [https://www.kaggle.com/ai-first/cocktail-ingredients](https://www.kaggle.com/ai-first/cocktail-ingredients). Read-only using [datasette](https://github.com/simonw/datasette) deployed on [heroku](https://www.heroku.com/).
 
 Saving favourites using Firebase.
